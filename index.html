@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Página simples para explicar o GitFlow e seus principais conceitos e comandos."
+    />
+    <title>GitFlow - Entenda o Fluxo</title>
+    <style>
+      body {
+        font-family: system-ui;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        background-color: #f4f4f9;
+        color: #333;
+      }
+      header {
+        background-color: #24292e;
+        color: #fff;
+        padding: 1rem 0;
+        text-align: center;
+      }
+      main {
+        padding: 1rem 2rem;
+      }
+      section {
+        margin-bottom: 2rem;
+      }
+      h1,
+      h2 {
+        color: #0366d6;
+      }
+      pre {
+        background: #e1e4e8;
+        padding: 1rem;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background-color: #24292e;
+        color: #fff;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>GitFlow - Entenda o Fluxo</h1>
+    </header>
+    <main>
+      <section>
+        <h2>O que é GitFlow?</h2>
+        <p>
+          O GitFlow é uma estratégia de branching usada para organizar o
+          desenvolvimento de software. Ele define regras claras para como e
+          quando usar diferentes branches, facilitando o trabalho em equipe e o
+          controle de versões.
+        </p>
+      </section>
+      <section>
+        <h2>Estrutura do GitFlow</h2>
+        <ul>
+          <li>
+            <strong>Branch principal:</strong> <code>main</code> ou
+            <code>master</code> (código estável e pronto para produção).
+          </li>
+          <li>
+            <strong>Branch de desenvolvimento:</strong>
+            <code>develop</code> (contém as mudanças que serão lançadas).
+          </li>
+          <li>
+            <strong>Feature branches:</strong> para novas funcionalidades.
+          </li>
+          <li><strong>Release branches:</strong> para preparar lançamentos.</li>
+          <li>
+            <strong>Hotfix branches:</strong> para corrigir problemas críticos
+            em produção.
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Fluxo de Trabalho</h2>
+        <h3>1. Criar um feature branch</h3>
+        <p>
+          Os feature branches são baseados no branch <code>develop</code> e são
+          usados para desenvolver novas funcionalidades.
+        </p>
+        <pre>
+# Criar um novo feature branch
+git checkout develop
+git checkout -b feature/nome-da-funcionalidade
+            </pre
+        >
+        <h3>2. Finalizar uma feature</h3>
+        <p>
+          Depois de concluir a funcionalidade, ela é integrada de volta ao
+          branch <code>develop</code>.
+        </p>
+        <pre>
+# Fazer merge da feature no develop
+git checkout develop
+git merge feature/nome-da-funcionalidade
+
+# Excluir o branch da feature
+git branch -d feature/nome-da-funcionalidade
+            </pre
+        >
+        <h3>3. Criar um release branch</h3>
+        <p>
+          Os release branches são usados para preparar um lançamento. Eles são
+          baseados no branch <code>develop</code>.
+        </p>
+        <pre>
+# Criar um release branch
+git checkout develop
+git checkout -b release/v1.0.0
+            </pre
+        >
+        <h3>4. Finalizar um release</h3>
+        <p>
+          O release branch é integrado aos branches <code>main</code> e
+          <code>develop</code>.
+        </p>
+        <pre>
+# Fazer merge no main
+git checkout main
+git merge release/v1.0.0
+
+# Criar uma tag para o lançamento
+git tag v1.0.0
+
+# Fazer merge de volta no develop
+git checkout develop
+git merge release/v1.0.0
+
+# Excluir o release branch
+git branch -d release/v1.0.0
+            </pre
+        >
+        <h3>5. Criar um hotfix branch</h3>
+        <p>
+          Os hotfix branches são baseados no branch <code>main</code> e são
+          usados para corrigir problemas críticos.
+        </p>
+        <pre>
+# Criar um hotfix branch
+git checkout main
+git checkout -b hotfix/v1.0.1
+
+# Depois de corrigir o problema
+git checkout main
+git merge hotfix/v1.0.1
+
+# Criar uma tag para a correção
+git tag v1.0.1
+
+# Fazer merge no develop
+git checkout develop
+git merge hotfix/v1.0.1
+
+# Excluir o hotfix branch
+git branch -d hotfix/v1.0.1
+            </pre
+        >
+      </section>
+    </main>
+    <footer>
+      <p>
+        Desenvolvido com ❤️
+        <a href="https://www.github.com/EuCaue">EuCaue</a> 🚀
+      </p>
+    </footer>
+  </body>
+</html>
